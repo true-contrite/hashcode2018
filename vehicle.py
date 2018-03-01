@@ -1,10 +1,11 @@
 class Vehicle():
 
-	def __init__(self, dest):
+	def __init__(self,id):
 
 		self.position = [0,0]
-		self.destination = dest
+		self.destination = None
 		self.available = True
+		self._uid = id
 
 	def __str__(self):
 
@@ -32,14 +33,21 @@ class Vehicle():
 
 class Ride():
 
-	def __init__(self, start, end, early, late):
+	def __init__(self, start, end, early, late, id):
 
 		self.startpos = start
 		self.endpos = end
 		self.earlytime = early
 		self.latetime = late
+		self.timedif = int(late) - int(early)
+		self.claimed = False
+		self.id = id
 
 	def __str__(self):
+
+		return("RIDE: Start Position: " + str(self.startpos) + " End Position: " + str(self.endpos) + " Earlytime: " + str(self.earlytime) + " Latetime: " + str(self.latetime))
+
+	def __repr__(self):
 
 		return("RIDE: Start Position: " + str(self.startpos) + " End Position: " + str(self.endpos) + " Earlytime: " + str(self.earlytime) + " Latetime: " + str(self.latetime))
 
@@ -51,7 +59,16 @@ class Ride():
 		return self.endpos
 
 	def get_earlytime(self):
-		return earlytime
+		return self.earlytime
 
 	def get_latetime(self):
-		return latetime
+		return self.latetime
+ 
+	def get_claimed(self):
+		return self.claimed
+
+	def get_difference(self):
+		return self.timedif
+##SETTERS
+	def set_claimed(self, boole):
+		self.claimed = boole
